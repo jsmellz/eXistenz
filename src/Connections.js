@@ -6,7 +6,8 @@ import { Container } from 'react-bootstrap';
 
 export const Connections = () => {
     
-    const accounts = useAccounts();
+    const accounts = useAccounts(["address1", "address2"]);
+
     return (
     <Styles>
             <div className="row justify-content-center add-connection">

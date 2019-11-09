@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useAccounts } from './Hooks'
 import accountPlaceholder from './assets/account-placeholder.png';
 
 export const Account = () => {
-
-    const account = useAccounts();
+    
     return (        
     
         <Styles>
