@@ -1,18 +1,25 @@
 import React, {useEffect, useState} from 'react';
-import randomCoordinates from 'random-coordinates'
+import firebase from '../firebase'
 
-export const useCoordinate = () => {
+export const useAccounts = (addresses) => {
 
-    const [coordinate, setCoordinate] = useState([])
-
+    const [accounts, setAccounts] = useState([])
     useEffect(() => {
-        generateCoordinate()
+        console.log("ADDRESSES", addresses)
+        firebase
+            .firestore()
+            .collection('accounts')
+            .onSnapshot((snapshot) => {
+                const loadedAccounts = snapshot.docs.map((doc) => ({
+                    // if (addresses.includes(doc.data().address)) {
+                    //     id: doc.id,
+                    //     ...doc.data()
+                    // }
+                }))
+                setAccounts(loadedAccounts)
+                console.log(loadedAccounts)
+            })
     },[])
-
-    function generateCoordinate() {
-        const coordinates = randomCoordinates().split(', ')
-        setCoordinate({lat:parseFloat(coordinates[0]), lng:parseFloat(coordinates[1])})
-     }
  
-     return { coordinate, generateCoordinate };
+     return accounts;
 }

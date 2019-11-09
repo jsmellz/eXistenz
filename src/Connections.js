@@ -1,33 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react'
 import styled from 'styled-components';
-import { useAccounts } from './Hooks'
 import accountPlaceholder from './assets/account-placeholder.png';
+import { useAccounts } from './Hooks'
+import { Container } from 'react-bootstrap';
 
-export const Account = () => {
-
-    const account = useAccounts();
-    return (        
+export const Connections = () => {
     
-        <Styles>
-            <div className="account-top">
-                <div className="row account-circle-row ">
-                    <div className="col account-circle text-center">
-                        <img src={accountPlaceholder} className="img-circle"/>
+    const accounts = useAccounts();
+    return (
+    <Styles>
+            <div className="row justify-content-center add-connection">
+                + new connection
+            </div>
+            { accounts.map((account) => 
+                    <div className="row justify-content-center username-row" key={account.id}>
+                        <div className="col-3 connection-circle ">
+                            <img src={accountPlaceholder} className="img-circle"/>
+                        </div>
+                        <div className="col-9 username-field">{account.username}</div>
                     </div>
-                </div>
-                <div className="row username-row">
-                    <div className="col username-field text-center">username</div>
-                </div>
-            </div>
-            <div className="row justify-content-center account-link">
-                <div className="col-3 link-circle text-center"></div>
-                <div className="col-9 link-field ">link</div>
-            </div>
-            <div className="row justify-content-center add-account-link">
-                add link
-            </div>
-        </Styles>
-    )
+            )
+            }
+
+        </Styles>)
 }
 
 const Styles = styled.div`
@@ -38,20 +33,6 @@ const Styles = styled.div`
         margin-right: auto;
         margin-left: auto;
         border-radius: 7px;
-    }
-
-    .account-circle-row {
-        height: 176px;
-    }
-    .account-circle {
-        position:relative;
-        background-color:#32363A;
-        height: 103px;
-        max-width: 103px;
-        border-radius: 50%;
-        margin-top:28px;
-        margin-right: auto;
-        margin-left: auto;
     }
 
     .img-circle {
@@ -76,24 +57,24 @@ const Styles = styled.div`
         border-radius: 7px;
         background-color:#32363A;
         margin-right: auto;
-        margin-left: auto;
         height: 45px;
         max-width: 90%;
     }
 
-    .account-link {
+    .username-row {
         color:white;
         align-items:center;
         background-color:#242527;
         height: 79px;
         width: 100%;
-        margin-top: 20px;
+        margin-top: 15px;
         margin-right: auto;
         margin-left: auto;
         border-radius: 7px;
     }
 
-    .link-circle {
+    .connection-circle {
+        position:relative;
         background-color:#32363A;
         height: 45px;
         max-width: 45px;
@@ -102,7 +83,7 @@ const Styles = styled.div`
         margin-left: auto;
     }
 
-    .link-field {
+    .username-field {
         color: #A19E9E;
         line-height: 45px;
         border-radius: 7px;
@@ -112,7 +93,8 @@ const Styles = styled.div`
         width: 80%;
     }
 
-    .add-account-link {
+    .add-connection {
+        margin-bottom: 50px;
         color: #A19E9E;
         align-items:center;
         background-color:clear;
